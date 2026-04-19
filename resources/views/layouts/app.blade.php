@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sistem Absensi</title>
+
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234f46e5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2v4'/%3E%3Cpath d='M16 2v4'/%3E%3Crect width='18' height='18' x='3' y='4' rx='2'/%3E%3Cpath d='M3 10h18'/%3E%3Cpath d='m9 16 2 2 4-4'/%3E%3C/svg%3E">
+
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234f46e5'%3E%3Cpath d='M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm-9-2l-3.5-3.5 1.41-1.41L10 15.17l5.59-5.59L17 11l-7 7z'/%3E%3C/svg%3E">
+
+    <meta name="theme-color" content="#0f172a">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -25,7 +33,14 @@
         <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
                class="fixed inset-y-0 left-0 z-30 w-64 bg-slate-900 text-white transition-transform duration-300 transform md:translate-x-0 md:static md:inset-0 flex flex-col shadow-2xl md:shadow-none">
             
-            <div class="flex items-center justify-center h-20 bg-slate-950 border-b border-slate-800">
+            <div class="flex items-center justify-center h-20 bg-slate-950 border-b border-slate-800 gap-2">
+                <svg class="w-8 h-8 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 2v4"></path>
+                    <path d="M16 2v4"></path>
+                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                    <path d="M3 10h18"></path>
+                    <path d="m9 16 2 2 4-4"></path>
+                </svg>
                 <span class="text-2xl font-black tracking-tight text-white">
                     Absensi<span class="text-indigo-500">App</span>
                 </span>
@@ -106,6 +121,10 @@
 
         </div>
     </div>
-
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js');
+            }
+        </script>
 </body>
 </html>
