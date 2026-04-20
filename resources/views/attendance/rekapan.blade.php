@@ -3,8 +3,8 @@
 @section('content')
 <div class="w-full">
     <div class="mb-6">
-        <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight">Rekap Gaji & Absensi</h2>
-        <p class="text-gray-500 text-sm font-medium mt-1">Laporan rekapitulasi kehadiran karyawan</p>
+        <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight">Rekap Absensi</h2>
+        <p class="text-gray-500 text-sm font-medium mt-1">Laporan Rekapitulasi Kehadiran</p>
     </div>
     
     <div class="bg-white p-5 rounded-2xl shadow-sm mb-6 border border-gray-100">

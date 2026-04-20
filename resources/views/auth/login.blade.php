@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Sistem Absensi</title>
+    <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -28,16 +28,16 @@
             @csrf
             <div>
                 <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 ml-1">Email</label>
-                <input type="email" name="email" value="{{ old('email') }}" class="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all placeholder:text-gray-300" placeholder="email@perusahaan.com" required autofocus>
+                <input type="email" name="email" value="{{ old('email') }}" class="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all placeholder:text-gray-300" placeholder="email" required autofocus>
             </div>
             
             <div>
                 <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 ml-1">Password</label>
-                <input type="password" name="password" class="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all placeholder:text-gray-300" placeholder="••••••••" required>
+                <input type="password" name="password" class="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all placeholder:text-gray-300" placeholder="password" required>
             </div>
             
             <button type="submit" class="w-full py-5 bg-indigo-600 text-white font-bold rounded-2xl shadow-xl shadow-indigo-200 hover:bg-indigo-700 transition transform active:scale-95 text-lg">
-                Masuk
+                Login
             </button>
         </form>
     </div>
