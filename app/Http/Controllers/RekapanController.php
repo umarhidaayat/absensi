@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Attendance;
 use App\Models\Office;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RekapanController extends Controller
 {
@@ -72,6 +73,43 @@ class RekapanController extends Controller
         }
 
         return view('attendance.detail', compact('user', 'attendances', 'startDate', 'endDate', 'dates', 'offices'));
+    }
+
+    public function exportPdf(Request $request, $id)
+    {
+        // Pengecekan akses
+        if (auth()->user()->role === 'karyawan' && auth()->id() != $id) {
+            abort(403, 'Akses Ditolak!');
+        }
+
+        $user = User::findOrFail($id);
+        
+        $defaultDates = $this->getDefaultDateRange();
+        $startDate = $request->input('start_date', $defaultDates['start']);
+        $endDate = $request->input('end_date', $defaultDates['end']);
+
+        $attendances = Attendance::where('user_id', $id)
+            ->whereBetween('date', [$startDate, $endDate])
+            ->get()
+            ->keyBy('date'); 
+
+        $offices = Office::with('shifts')->get();
+
+        $dates = [];
+        $currentDate = Carbon::parse($startDate);
+        $lastDate = Carbon::parse($endDate);
+
+        while ($currentDate->lte($lastDate)) {
+            $dates[] = $currentDate->copy();
+            $currentDate->addDay();
+        }
+
+        // Generate PDF menggunakan view khusus
+        $pdf = Pdf::loadView('attendance.pdf', compact('user', 'attendances', 'startDate', 'endDate', 'dates', 'offices'))
+                  ->setPaper('a4', 'landscape'); // Menggunakan format A4 Lanskap agar tabel muat
+
+        // Download file PDF
+        return $pdf->download('Detail_Absensi_' . str_replace(' ', '_', $user->name) . '_' . $startDate . '_' . $endDate . '.pdf');
     }
 
     public function updateDetail(Request $request, $id)

@@ -57,6 +57,16 @@
             </button>
         </form>
     </div>
+    
+    <div class="flex justify-between items-end mb-4 px-1">
+        <div>
+            <h3 class="text-lg font-bold text-gray-800">Rekap Data Karyawan</h3>
+        </div>
+        <a href="{{ route('bonus.exportPdf', request()->query()) }}" target="_blank" class="bg-rose-500 hover:bg-rose-600 text-white px-5 py-2.5 rounded-xl shadow-sm shadow-rose-200 text-sm font-bold transition flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            Export ke PDF
+        </a>
+    </div>
 
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <div class="overflow-x-auto">

@@ -28,9 +28,11 @@ Route::middleware('auth')->group(function () {
     // ------------------------------------------
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/ganti-password', [PasswordController::class, 'edit'])->name('password.edit');
+    Route::put('/ganti-password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::get('/rekapan', [RekapanController::class, 'index'])->name('rekapan');
     Route::get('/rekapan/detail/{id}', [RekapanController::class, 'detail'])->name('rekapan.detail');
+    Route::get('/rekapan/detail/{id}/pdf', [RekapanController::class, 'exportPdf'])->name('rekapan.exportPdf');
     Route::post('/rekapan/detail/{id}', [RekapanController::class, 'updateDetail'])->name('rekapan.updateDetail');
 
     // ------------------------------------------
@@ -46,6 +48,7 @@ Route::middleware('auth')->group(function () {
     // ------------------------------------------
     Route::middleware([RoleCheck::class.':admin'])->group(function () {
         Route::get('/bonus', [BonusController::class, 'index'])->name('bonus');
+        Route::get('/bonus/pdf', [BonusController::class, 'exportPdf'])->name('bonus.exportPdf');
 
         Route::get('/akun', [AccountController::class, 'index'])->name('akun.index');
         Route::get('/akun/tambah', [AccountController::class, 'create'])->name('akun.create');

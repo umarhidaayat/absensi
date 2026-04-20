@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Attendance;
 use App\Models\Office;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BonusController extends Controller
 {
@@ -51,5 +52,37 @@ class BonusController extends Controller
             'users', 'attendances', 'startDate', 'endDate', 
             'rateLate', 'rateEarly', 'rateOverMin', 'rateOverDay', 'shiftLookup'
         ));
+    }
+
+    public function exportPdf(Request $request)
+    {
+        $defaultDates = $this->getDefaultDateRange();
+        $startDate = $request->input('start_date', $defaultDates['start']);
+        $endDate = $request->input('end_date', $defaultDates['end']);
+
+        $rateLate = $request->input('rate_late', 166);         
+        $rateEarly = $request->input('rate_early', 0);       
+        $rateOverMin = $request->input('rate_over_min', 299); 
+        $rateOverDay = $request->input('rate_over_day', 55000); 
+
+        $users = User::where('role', 'karyawan')->get();
+        $attendances = Attendance::whereBetween('date', [$startDate, $endDate])->get();
+        $offices = Office::with('shifts')->get();
+
+        $shiftLookup = [];
+        foreach ($offices as $office) {
+            foreach ($office->shifts as $shift) {
+                $label = $office->name . ' - ' . $shift->name;
+                $shiftLookup[$label] = $shift;
+            }
+        }
+
+        // Generate PDF menggunakan view khusus
+        $pdf = Pdf::loadView('attendance.bonus_pdf', compact(
+            'users', 'attendances', 'startDate', 'endDate', 
+            'rateLate', 'rateEarly', 'rateOverMin', 'rateOverDay', 'shiftLookup'
+        ))->setPaper('a4', 'landscape'); // Format lanskap agar tabel rapi
+
+        return $pdf->download('Rekap_Bonus_Potongan_' . $startDate . '_sd_' . $endDate . '.pdf');
     }
 }

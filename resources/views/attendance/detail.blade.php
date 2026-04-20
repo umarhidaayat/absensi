@@ -11,8 +11,15 @@
             <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight">Detail Log Absensi</h2>
             <p class="text-gray-500 text-sm font-medium mt-1">Karyawan: <span class="text-indigo-600 font-black uppercase">{{ $user->name }}</span></p>
         </div>
-        <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 text-xs font-bold text-gray-600">
-            Periode: {{ \Carbon\Carbon::parse($startDate)->translatedFormat('d F Y') }} - {{ \Carbon\Carbon::parse($endDate)->translatedFormat('d F Y') }}
+        <div class="flex flex-col sm:flex-row gap-3">
+            <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 text-xs font-bold text-gray-600 flex items-center">
+                Periode: {{ \Carbon\Carbon::parse($startDate)->translatedFormat('d F Y') }} - {{ \Carbon\Carbon::parse($endDate)->translatedFormat('d F Y') }}
+            </div>
+            
+            <a href="{{ route('rekapan.exportPdf', ['id' => $user->id, 'start_date' => $startDate, 'end_date' => $endDate]) }}" target="_blank" class="bg-rose-500 hover:bg-rose-600 text-white p-3 rounded-xl shadow-sm shadow-rose-200 text-xs font-bold transition flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                Export PDF
+            </a>
         </div>
     </div>
 
