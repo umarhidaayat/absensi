@@ -34,7 +34,8 @@ class RekapanController extends Controller
         $endDate = $request->input('end_date', $defaultDates['end']);
         
         if (auth()->user()->role === 'admin') {
-            $users = User::where('role', 'karyawan')->get();
+            // Tambahkan orderBy di sini agar urut A-Z
+            $users = User::where('role', 'karyawan')->orderBy('name', 'asc')->get();
         } else {
             $users = User::where('id', auth()->id())->get();
         }

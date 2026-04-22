@@ -36,7 +36,7 @@ class BonusController extends Controller
         $rateOverMin = $request->input('rate_over_min', 299); 
         $rateOverDay = $request->input('rate_over_day', 55000); 
 
-        $users = User::where('role', 'karyawan')->get();
+        $users = User::where('role', 'karyawan')->orderBy('name', 'asc')->get();
         $attendances = Attendance::whereBetween('date', [$startDate, $endDate])->get();
         $offices = Office::with('shifts')->get();
 
@@ -65,7 +65,7 @@ class BonusController extends Controller
         $rateOverMin = $request->input('rate_over_min', 299); 
         $rateOverDay = $request->input('rate_over_day', 55000); 
 
-        $users = User::where('role', 'karyawan')->get();
+        $users = User::where('role', 'karyawan')->orderBy('name', 'asc')->get();
         $attendances = Attendance::whereBetween('date', [$startDate, $endDate])->get();
         $offices = Office::with('shifts')->get();
 
