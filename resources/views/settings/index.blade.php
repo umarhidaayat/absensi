@@ -41,12 +41,22 @@
                         </td>
                         
                         <td class="py-3 px-4 border-b text-center">
-                            <a href="{{ route('setting.shift', $office->id) }}" class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-3 rounded mr-1 transition duration-200 inline-block mb-1 sm:mb-0">
-                                ⏱️ Kelola Shift
-                            </a>
-                            <a href="{{ route('setting.edit', $office->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm py-1 px-3 rounded transition duration-200 inline-block">
-                                Edit
-                            </a>
+                            <div class="flex flex-wrap items-center justify-center gap-2">
+                                <a href="{{ route('setting.shift', $office->id) }}" class="bg-green-500 hover:bg-green-600 text-white text-sm py-1.5 px-3 rounded transition duration-200">
+                                    ⏱️ Kelola Shift
+                                </a>
+                                <a href="{{ route('setting.edit', $office->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm py-1.5 px-3 rounded transition duration-200">
+                                    ✏️ Edit
+                                </a>
+                                
+                                <form action="{{ route('setting.destroy', $office->id) }}" method="POST" class="inline-block" onsubmit="return confirm('PERINGATAN: Menghapus kantor ini juga akan menghapus semua shift di dalamnya. Lanjutkan?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white text-sm py-1.5 px-3 rounded transition duration-200">
+                                        🗑️ Hapus
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @empty

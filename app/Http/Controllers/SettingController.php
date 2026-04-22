@@ -54,6 +54,19 @@ class SettingController extends Controller
         return redirect()->route('setting.index')->with('success', 'Data kantor berhasil diperbarui!');
     }
 
+    public function destroy($id)
+    {
+        $office = Office::findOrFail($id);
+        
+        // Hapus juga semua shift yang terhubung dengan kantor ini agar database bersih
+        $office->shifts()->delete(); 
+        
+        // Baru hapus data kantornya
+        $office->delete();
+
+        return redirect()->route('setting.index')->with('success', 'Data kantor beserta shift-nya berhasil dihapus permanen!');
+    }
+
     public function shiftIndex(Office $office)
     {
         $shifts = $office->shifts;

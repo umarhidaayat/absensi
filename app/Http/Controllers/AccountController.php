@@ -10,7 +10,8 @@ class AccountController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('role', 'asc')->orderBy('name', 'asc')->get();
+        
         return view('akun.index', compact('users'));
     }
 

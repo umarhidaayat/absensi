@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/setting', [SettingController::class, 'store'])->name('setting.store');
         Route::get('/setting/{id}/edit', [SettingController::class, 'edit'])->name('setting.edit');
         Route::put('/setting/{id}', [SettingController::class, 'update'])->name('setting.update');
+        Route::delete('/setting/{id}', [SettingController::class, 'destroy'])->name('setting.destroy');
         
         Route::get('/setting/{office}/shift', [SettingController::class, 'shiftIndex'])->name('setting.shift');
         Route::post('/setting/{office}/shift', [SettingController::class, 'shiftStore'])->name('setting.shift.store');
